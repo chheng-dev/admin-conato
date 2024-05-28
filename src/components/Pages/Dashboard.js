@@ -1,13 +1,12 @@
 // src/components/Dashboard.js
 import React from 'react';
-import LogoutButton from './auth/LogoutButton';
+import Layout from '../Layouts/Layout';
 
 const Dashboard = () => {
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <LogoutButton />
-    </div>
+    <Layout>
+     <h1>Dashboard</h1>
+   </Layout>
   );
 };
 

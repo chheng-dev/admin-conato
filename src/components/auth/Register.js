@@ -11,7 +11,7 @@ const Register = () => {
 
   useEffect(() => {
     if (isAuthenticated()) {
-      history.push('/dashboard');
+      history.push('/');
     }
   }, []);
 

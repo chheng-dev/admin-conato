@@ -12,7 +12,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isAuthenticated()) {
-      history.push('/dashboard');
+      history.push('/');
     }
   }, []);
 
@@ -28,7 +28,7 @@ const Login = () => {
       const response = await axios.post('http://localhost:3001/auth/login', { email, password });
       const token = response.data.token;
       localStorage.setItem('token', token);
-      history.push('/dashboard');
+      history.push('/');
     } catch (error) {
       toast.error('Invalid email or password');
     }
