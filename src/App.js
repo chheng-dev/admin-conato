@@ -15,7 +15,10 @@ import EditCategory from './components/Category/EditCategory';
 import Brand from './components/Pages/Brand';
 import NewBrand from './components/Brand/NewBrand';
 import EditBrand from './components/Brand/EditBrand';
+
 import Product from './components/Pages/Product';
+import NewProduct from './components/Product/NewProduct';
+import EditProduct from './components/Product/EditProduct.jsx';
 
 const App = () => {
   return (
@@ -37,6 +40,9 @@ const App = () => {
         <PrivateRoute path="/brand/edit/:id" component={EditBrand} />
 
         <PrivateRoute path="/products" component={Product} />
+        <PrivateRoute path="/product/new" component={NewProduct} />
+        <PrivateRoute path="/product/edit/:id" component={EditProduct} />
+
 
       </Switch>
     </Router>
