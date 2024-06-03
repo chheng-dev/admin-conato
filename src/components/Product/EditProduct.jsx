@@ -6,7 +6,7 @@ export default class EditProduct extends React.Component{
   render(){
     return (
       <Layout>
-        <FormProduct mode='edit' productId={this.props.match.params.id} />
+        <FormProduct mode='edit' slug={this.props.match.params.id} />
       </Layout>
     )
   }

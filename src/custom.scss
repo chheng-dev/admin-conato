@@ -2,6 +2,7 @@
 @import 'https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@100..900&display=swap';
 @import '@coreui/coreui/dist/css/coreui.min.css';
 @import './stylesheets/overrides.scss';
+@import './stylesheets/variabless.scss';
 
 
 body{
@@ -25,4 +26,42 @@ a{
   margin-right: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
+}
+.tab-title{
+  list-style: none;
+  width: 25%;
+  left: 0%;
+  padding: 0;
+  cursor: pointer;
+  padding-left: 10px;
+  padding-right: 10px;
+  
+  li {
+
+    padding: 8px 16px;
+    border-bottom: 1px solid #dedede;
+  }
+  li:active, li:focus, li:visited{
+    background-color: $primary-color;
+    color: white;
+  }
+}
+
+.tab-panel{
+  width: 70%;
+  height: 100%;
+}
+.avatar-img {
+  height: 8rem;
+  width: 8rem;
+  border-radius: 50%;
+  padding: 2px;
+}
+
+.body-authorization { 
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -51,9 +51,9 @@ class BrandServiceApi{
     }
   }
 
-  static async deleteBrand(brandId) {
+  static async deleteBrandBySlug(slug) {
     try{
-      const response = await axios.delete(`${API_BASE_URL}/brand/${brandId}`);
+      const response = await axios.delete(`${API_BASE_URL}/brand/${slug}`);
       return response.data;
     }catch(err){
       console.log('Brand given id not found.');

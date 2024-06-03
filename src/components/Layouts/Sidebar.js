@@ -17,11 +17,19 @@ import { Space } from 'antd';
 import { TbBrandAppgallery } from "react-icons/tb";
 import { IoSettings } from "react-icons/io5";
 import { TiShoppingCart } from "react-icons/ti";
-
+import { useHistory } from 'react-router-dom';
+import { FaRegUser } from "react-icons/fa";
 
 
 
 const Sidebar = () => {
+  const history = useHistory();
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('token');
+    history.push('/login');
+  };
+
   return (
     <CSidebar className="border-end">
       <CSidebarHeader className="border-bottom">
@@ -57,8 +65,14 @@ const Sidebar = () => {
             </Space>
           }
         >
-          <CNavItem href="#"><span className="nav-icon"><span className="nav-icon-bullet"></span></span> Nav dropdown item</CNavItem>
-          <CNavItem href="#"><span className="nav-icon"><span className="nav-icon-bullet"></span></span> Log out</CNavItem>
+          <CNavItem href="/user/profile"> 
+            <Space>
+              <FaRegUser/> Profile
+            </Space>
+          </CNavItem>
+          <CNavItem href='#' onClick={handleLogout}>
+            <span className="nav-icon"><span className="nav-icon-bullet"></span></span> Log out
+          </CNavItem>
         </CNavGroup>
         <CNavItem href="https://coreui.io"><CIcon customClassName="nav-icon" icon={cilCloudDownload} /> Download CoreUI</CNavItem>
         <CNavItem href="https://coreui.io/pro/"><CIcon customClassName="nav-icon" icon={cilLayers} /> Try CoreUI PRO</CNavItem>

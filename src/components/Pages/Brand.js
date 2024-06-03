@@ -13,7 +13,7 @@ export default class Brand extends React.Component {
       brands: [],
       openPopOver: false,
       showConfirmModal: false,
-      deleteRecordId: null,
+      deleteRecordSlug: null,
     };
     this.handleOpenPopOverChange = this.handleOpenPopOverChange.bind(this);
     this.handleCancelDelete = this.handleCancelDelete.bind(this);
@@ -46,9 +46,9 @@ export default class Brand extends React.Component {
   }
 
   async handleConfirmDelete(){
-    const { deleteRecordId } = this.state;
+    const { deleteRecordSlug } = this.state;
     try {
-      await BrandServiceApi.deleteCategoryById(deleteRecordId);
+      await BrandServiceApi.deleteBrandBySlug(deleteRecordSlug);
       this.fetchBrands();
       toast.success('Category deleted successfully.');
     } catch (error) {
@@ -75,7 +75,7 @@ export default class Brand extends React.Component {
         title: 'Name',
         dataIndex: 'name',
         key: 'name',
-        render: (text, record) => <a href={`/brand/edit/${record.id}`}>{text}</a>,
+        render: (text, record) => <a href={`/brand/edit/${record.slug}`}>{text}</a>,
       },
       {
         title: 'Description',
@@ -89,7 +89,7 @@ export default class Brand extends React.Component {
         key: 'action',
         render: (text, record) => (
           <Space>
-            <a href={`/brand/edit/${record.id}`}>
+            <a href={`/brand/edit/${record.slug}`}>
               Edit
             </a>
             <a
@@ -98,7 +98,7 @@ export default class Brand extends React.Component {
               onClick={() => {
                 this.setState({
                   showConfirmModal: true,
-                  deleteRecordId: record.id,
+                  deleteRecordSlug: record.slug,
                 });
               }}
             >

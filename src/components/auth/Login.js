@@ -1,7 +1,6 @@
-// src/components/Login.js
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
+import axios from 'axios'; 
 import { isAuthenticated } from '../../auth';
 import { toast } from 'react-toastify';
 
@@ -27,7 +26,7 @@ const Login = () => {
     try {
       const response = await axios.post('http://localhost:3001/auth/login', { email, password });
       const token = response.data.token;
-      localStorage.setItem('token', token);
+      sessionStorage.setItem('token', token);
       history.push('/');
     } catch (error) {
       toast.error('Invalid email or password');

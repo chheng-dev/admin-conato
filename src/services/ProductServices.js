@@ -12,6 +12,7 @@ class ProductServiceApi{
           this.getCategoryById(product.category_id),
           this.getBrandById(product.brand_id)
         ]);
+        
         return { ...product, category, brand };
       });
 
@@ -35,7 +36,7 @@ class ProductServiceApi{
 
   static async getBrandById(id){
     try {
-      const response = await axios.get(`${API_BASE_URL}/brand/${id}`);
+      const response = await axios.get(`${API_BASE_URL}/getBrandId/${id}`);
       return response.data;
       
     } catch(error) {
@@ -58,9 +59,9 @@ class ProductServiceApi{
     }
   }
 
-  static async getProductById(id){
+  static async getProductBySlug(slug){
     try {
-      const productResponse = await axios.get(`${API_BASE_URL}/product/${id}`);
+      const productResponse = await axios.get(`${API_BASE_URL}/product/${slug}`);
       const product = productResponse.data;
 
       const [category, brand] = await Promise.all([
@@ -75,12 +76,9 @@ class ProductServiceApi{
     }
   }
 
-  static async updateProduct(id, formData){
-    console.log('formData', formData);
-    console.log('od', id);
-
+  static async updateProduct(slug, formData){
     try {
-      const response = await axios.put(`${API_BASE_URL}/product/${id}`, formData, {
+      const response = await axios.put(`${API_BASE_URL}/product/${slug}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -88,7 +86,7 @@ class ProductServiceApi{
 
       return response.data;
     } catch (err) {
-      console.log('Product given id not found.');
+      console.log('Product given slug not found.');
       throw err;
     }
   }
@@ -96,6 +94,16 @@ class ProductServiceApi{
   static async deleteProduct(id){
     try{
       const response = await axios.delete(`${API_BASE_URL}/product/${id}`);
+      return response.data;
+    }catch(err){
+      console.log('Product given id not found.');
+      throw err;
+    }
+  }
+
+  static async deleteProductBySlug(slug){
+    try{
+      const response = await axios.delete(`${API_BASE_URL}/product/${slug}`);
       return response.data;
     }catch(err){
       console.log('Product given id not found.');

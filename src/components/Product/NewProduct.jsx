@@ -6,14 +6,14 @@ export default class NewProduct extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      brands: []
     }
+
   }
 
   render(){
     return (
       <Layout>
-        <FormProduct mode="new" brands={this.state.brands} />
+        <FormProduct mode="new" />
       </Layout>
     )
   }

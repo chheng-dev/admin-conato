@@ -35,15 +35,16 @@ export default class FormProduct extends React.Component {
 
   componentDidMount() {
     if (this.props.mode === "edit") {
-      this.fetchProductById(this.props.productId);
+      console.log(this.props.slug)
+      this.fetchProductBySlug(this.props.slug);
     }
     this.fetchCategoryOptions();
     this.fetchBrandOptions();
   }
 
-  async fetchProductById(id) {
+  async fetchProductBySlug(slug) {
     try {
-      const product = await ProductServiceApi.getProductById(id);
+      const product = await ProductServiceApi.getProductBySlug(slug);
       this.setState({
         name: product.name || "",
         description: product.description || "",
@@ -132,7 +133,7 @@ export default class FormProduct extends React.Component {
           selectedBrand: null,
         });
       } else if (this.props.mode === 'edit') {
-        await ProductServiceApi.updateProduct(this.props.productId, formData);
+        await ProductServiceApi.updateProduct(this.props.slug, formData);
       }
 
       toast.success(`${this.props.mode === 'new' ? 'Created' : 'Updated'} product successfully`);

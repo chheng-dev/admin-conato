@@ -16,7 +16,7 @@ export default class Product extends React.Component {
       categories: [],
       openPopOver: false,
       showConfirmModal: false,
-      deleteRecordId: null,
+      deleteRecordSlug: null,
     };
     this.handleOpenPopOverChange = this.handleOpenPopOverChange.bind(this);
     this.handleCancelDelete = this.handleCancelDelete.bind(this);
@@ -24,10 +24,10 @@ export default class Product extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchCategories();
+    this.fetchProductList();
   }
 
-  async fetchCategories() {
+  async fetchProductList() {
     try {
       const result = await ProductServiceApi.getProductList();
       this.setState({ products: result });
@@ -49,10 +49,10 @@ export default class Product extends React.Component {
   }
 
   async handleConfirmDelete(){
-    const { deleteRecordId } = this.state;
+    const { deleteRecordSlug } = this.state;
     try {
-      await ProductServiceApi.deleteProduct(deleteRecordId);
-      this.fetchCategories();
+      await ProductServiceApi.deleteProductBySlug(deleteRecordSlug);
+      this.fetchProductList();
       toast.success('Product deleted successfully.');
     } catch (error) {
       console.error('Error executing delete product:', error);
@@ -73,7 +73,7 @@ export default class Product extends React.Component {
         title: 'Name',
         dataIndex: 'name',
         key: 'name',
-        render: (text, record) => <a href={`/product/edit/${record.id}`}>{text}</a>,
+        render: (text, record) => <a href={`/product/edit/${record.slug}`}>{text}</a>,
       },
       {
         title: 'Image',
@@ -130,7 +130,7 @@ export default class Product extends React.Component {
         width: 100,    
         render: (text, record) => (
           <Space>
-            <a href={`/product/edit/${record.id}`}>
+            <a href={`/product/edit/${record.slug}`}>
               Edit
             </a>
             <a
@@ -139,7 +139,7 @@ export default class Product extends React.Component {
               onClick={() => {
                 this.setState({
                   showConfirmModal: true,
-                  deleteRecordId: record.id,
+                  deleteRecordSlug: record.slug,
                 });
               }}
             >
